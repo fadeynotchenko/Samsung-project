@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Хочу помочь!</string>
+    <string name="profile">Изменить профиль</string>
+    <string name="setting">Настройки</string>
+    <string name="mp">Карта</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_api">AIzaSyARlIzoOqBGh-vH-bJytCtzeXBuL0Km7k8</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="info2">Программа использует ваше местоположение. Чтобы войти в приложение, Вам нужно зарегистрироваться и разрешить доступ к геолокации </string>
+    <string name="info1">Волонтерско-социальный проект, в котором ты можешь попросить или оказать помощь </string>
+    <string name="info3">С помощью карты Вы можете посмотреть, кто нуждается в помощи рядом с вами</string>
+    <string name="register">Авторизация</string>
+    <string name="register2">Регистрация</string>
+    <string name="info4">* Нажимая кнопку "Register", Вы автоматически соглашаетесь на обработку персональных данных</string>
+    <string name="info7">* Изменить имя или контактный номер можно в разделе "Мой профиль". Eсли у Вас уже есть маркер, нажав на кнопку повторно, информация обновится.</string>
+    <string name="info5">Нет аккаунта? Зарегистрироваться</string>
+    <string name="info6">Регистрация успешна</string>
+
+    <string name="mymarkers">Активный маркер</string>
+    <string name="logg">Выйти из аккаунта</string>
+    <string name="mymarkers2">Отказаться от подопечного</string>
+    <string name="markers">Маркеры</string>
+    <string name="add">Добавить маркер</string>
+    <string name="exit">Выйти из аккаунта </string>
+    <string name="signIn">Войти</string>
+    <string name="save">Сохранить</string>
+    <string name="qq">Описание проблемы:</string>
+    <string name="t2">Показать все маркеры</string>
+    <string name="w1">Имя подопечного:</string>
+    <string name="w12">Имя:</string>
+    <string name="w2">Телефон подопечного:</string>
+    <string name="ww2">Телефон волонтёра:</string>
+    <string name="www2">Имя волонтёра:</string>
+    <string name="w3">* В этом разделе показано объявление, на которое Вы откликнулись, активных маркеров не может быть больше одного!</string>
+    <string name="w3w">* В этом разделе показан Ваш добавленный маркер. Удалитиь маркер можно в разделе "Карта".</string>
+    <string name="w4">У Вас нет активного маркера!</string>
+    <string name="w5">У Вас нет маркера!</string>
+    <string name="h1">Высокая</string>
+    <string name="h2">Средняя</string>
+    <string name="h3">Низкая</string>
+    <string name="q1">Нажмите на текст, чтобы откликнуться на объявление.</string>
+    <string name="up1">Загрузите свое фото!</string>
+    <string name="up2">Выберете степень срочности:</string>
+    <string name="newPass">Введите новый пароль</string>
+    <string name="newNamed">Введите новое имя</string>
+    <string name="newNamed2">Введите новую почту</string>
+    <string name="map">Карта</string>
+    <string name="email">Почта:</string>
+    <string name="password">Пароль:</string>
+    <string name="password2">Изменить пароль</string>
+    <string name="login">Вход</string>
+    <string name="profile2">Изменить профиль</string>
+    <string name="loginAcc">Войдите в свой аккаунт.</string>
+    <string name="Register">Register</string>
+    <string name="RegisterAcc">Зарегестрируйте аккаунт</string>
+    <string name="name">Имя:</string>
+    <string name="name22">Почта:</string>
+    <string name="editpass">Edit password:</string>
+    <string name="editname">Edit name:</string>
+    <string name="phone">Телефон:</string>
+    <string name="phone2">Телефон</string>
+    <string name="clearmap">Очистить карту</string>
+    <string name="clearmarker">Удалить мой маркер</string>
+    <string name="ad">Откликнуться на маркер!</string>
+    <string name="addmarker">Добавить маркер</string>
+    <string name="addbtn">Добавить</string>
+    <string name="name2">Измненить имя</string>
+    <string name="name3">Измненить почту</string>
+    <string name="update">Имя изменено!</string>
+    <string name="updatePass">Пароль изменён!</string>
+    <string name="addMarker">Маркер добавлен!</string>
+
+    <string name="permission">Permission Denied</string>
+    <string name="permission_full">Permission to access device location is permanently denied. you need to go to setting to allow the permission.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="problem">Описание проблемы:</string>
+
+    <string name="passEmpty">Заполните поле password:</string>
+    <string name="infoEmpty">Заполните поле!</string>
+    <string name="phoneEmpty">Заполните поле phone:</string>
+    <string name="nameEmpty">Заполните поле pass:</string>
+    <string name="emailEmpty">Данный email не является действительным</string>
+
+
+</resources>

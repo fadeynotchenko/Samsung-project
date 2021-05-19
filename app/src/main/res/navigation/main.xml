@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/map">
+
+    <activity
+        android:id="@+id/setting"
+        android:name="com.example.myapplication.SettingActivity"
+        android:label="setting"
+        tools:layout="@layout/activity_setting" >
+
+    </activity>
+
+    <activity
+        android:id="@+id/profile"
+        android:name="com.example.myapplication.ProfileActivity"
+        android:label="profile"
+        tools:layout="@layout/activity_profile" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.example.myapplication.fragment.MapFragment"
+        android:label="map"
+        tools:layout="@layout/fragment_map" >
+
+        <action
+            android:id="@+id/action_map_to_setting"
+            app:destination="@id/setting" />
+        <action
+            android:id="@+id/action_map_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_map_to_logout"
+            app:destination="@id/logout" />
+        <action
+            android:id="@+id/action_map_to_addMarker"
+            app:destination="@id/addMarker" />
+        <action
+            android:id="@+id/action_map_to_mymarkers"
+            app:destination="@id/mymarkers" />
+    </fragment>
+
+    <activity
+        android:id="@+id/mymarkers"
+        android:name="com.example.myapplication.fragment.marker.MyMarkerActivity"
+        android:label="mymarkers"
+        tools:layout="@layout/activity_my_marker" />
+
+    <activity
+        android:id="@+id/addMarker"
+        android:name="com.example.myapplication.AddMarkerActivity"
+        android:label="addMarker"
+        tools:layout="@layout/activity_add_marker" />
+
+    <fragment
+        android:id="@+id/logout"
+        android:name="com.example.myapplication.fragment.FragmentLogout"
+        android:label="loout"
+        tools:layout="@layout/fragment_logout" >
+
+    </fragment>
+
+</navigation>

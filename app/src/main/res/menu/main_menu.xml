@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/setting"
+        android:title="@string/setting"
+        >
+    </item>
+
+    <item
+        android:id="@+id/profile"
+        android:title="@string/profile"
+        >
+    </item>
+
+    <item
+        android:id="@+id/addMarker"
+        android:title="@string/add"
+        >
+    </item>
+
+    <item
+        android:id="@+id/mymarkers"
+        android:title="@string/mymarkers"
+        >
+    </item>
+
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logg"
+        >
+    </item>
+
+</menu>
