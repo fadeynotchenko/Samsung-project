@@ -25,6 +25,8 @@
     <string name="exit">Выйти из аккаунта </string>
     <string name="signIn">Войти</string>
     <string name="save">Сохранить</string>
+    <string name="ds22">"Хочу</string>
+    <string name="ds22w">Помочь!"</string>
     <string name="qq">Описание проблемы:</string>
     <string name="t2">Показать все маркеры</string>
     <string name="w1">Имя подопечного:</string>

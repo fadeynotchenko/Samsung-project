@@ -54,6 +54,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -119,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //local data
         firebaseAuth = FirebaseAuth.getInstance();
-        emailUser = firebaseAuth.getCurrentUser().getEmail();
+        emailUser = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(emailUser, MODE_PRIVATE);
         name = sharedPreferences.getString("name", "");
         phoneSP = sharedPreferences.getString("phone", "");
@@ -127,22 +128,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         zoom = sharedPreferences.getString("zoom", "");
         map = sharedPreferences.getString("map", "");
         returnMap();
-
-        //retro map
-        ImageView moon = findViewById(R.id.changetonight);
-        ImageView light = findViewById(R.id.changetonormal);
-        moon.setOnClickListener(v -> {
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json_night));
-            light.setVisibility(View.VISIBLE);
-            moon.setVisibility(View.INVISIBLE);
-        });
-
-        //light map
-        light.setOnClickListener(v -> {
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
-            light.setVisibility(View.INVISIBLE);
-            moon.setVisibility(View.VISIBLE);
-        });
 
         //location builder
         LocationRequest locationRequest = LocationRequest.create();
@@ -183,9 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //navigation view
         DrawerLayout drawer = findViewById(R.id.drawer);
-        findViewById(R.id.imageMenu).setOnClickListener(v -> {
-            drawer.openDrawer(GravityCompat.START);
-        });
+        findViewById(R.id.imageMenu).setOnClickListener(v -> drawer.openDrawer(GravityCompat.START));
 
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setItemIconTintList(null);
@@ -208,7 +191,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         View bottom_sheet = findViewById(R.id.nestedScroll);
         bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
         bottomSheetBehavior.setHideable(false);
-        bottomSheetBehavior.setPeekHeight(150);
+        bottomSheetBehavior.setPeekHeight(170);
 
         View bottomsheet = findViewById(R.id.viewInfo);
         sheetBehavior2 = BottomSheetBehavior.from(bottomsheet);
@@ -249,7 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //dell marker
         Button dellMarker = findViewById(R.id.dellMarker);
-        dellMarker.setOnClickListener(v -> { deleteMarker(); });
+        dellMarker.setOnClickListener(v -> deleteMarker());
 
         //adapter view
         ListView listView = findViewById(R.id.listView);
@@ -331,7 +314,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         reference.child(phoneSP).child("name").removeValue();
         reference.child(phoneSP).child("phone").removeValue();
 
-
         Toast.makeText(MapsActivity.this, "Маркер удалён!", Toast.LENGTH_SHORT).show();
     }
 
@@ -376,6 +358,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void markerView() {
+
         DatabaseReference df = FirebaseDatabase.getInstance().getReference().child("users");
 
         df.addValueEventListener(new ValueEventListener() {
@@ -486,6 +469,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private String getEmail() {
+
         if (emailSP.equals("null")) {
             return emailUser;
         } else {
@@ -494,6 +478,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private float getDEFAULT_ZOOM() {
+
         if (zoom != null && !zoom.isEmpty() && !zoom.equals("null")) {
             return Float.parseFloat(zoom);
         } else {
@@ -503,6 +488,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void returnMap(){
+
         if (map.equals("Стандарт")) {
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
         } else if(map.equals("Ретро")){

@@ -22,7 +22,7 @@
         <TextView
             android:id="@+id/listName"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:paddingStart="10dp"
             android:text="Fadey"
@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/listText"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:gravity="start"
             android:paddingStart="10dp"
