@@ -1,15 +1,12 @@
 package com.example.myapplication;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
@@ -18,13 +15,9 @@ import java.util.ArrayList;
 
 public class ProgramAdapter extends ArrayAdapter<String> {
 
-    Context context;
-    ArrayList<String> text;
-    ArrayList<String> name;
-    ArrayList<String> phone;
-    ArrayList<String> view;
-    ArrayList<String> image;
-    ProgramViewHolder holder = null;
+    public Context context;
+    public ArrayList<String> text, name, phone, view, image;
+    public ProgramViewHolder holder = null;
 
     public ProgramAdapter(Context context, ArrayList<String> name, ArrayList<String> phone, ArrayList<String> text, ArrayList<String> view, ArrayList<String> image) {
         super(context, R.layout.row, R.id.listName, name);
@@ -41,7 +34,7 @@ public class ProgramAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View row = convertView;
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.row, parent, false);
             holder = new ProgramViewHolder(row);
@@ -51,8 +44,8 @@ public class ProgramAdapter extends ArrayAdapter<String> {
         }
         holder.Viewtext.setText(text.get(position));
         holder.Viewname.setText(name.get(position));
-        holder.viewList.setText(getTextArray(position));
-        if(image.get(position).equals("null")){
+        holder.viewList.setText(getImportance(position));
+        if (image.get(position).equals("null")) {
             holder.imageView.setImageResource(R.drawable.ic_user2);
         } else {
             Glide.with(context).load(image.get(position)).into(holder.imageView);
@@ -60,7 +53,7 @@ public class ProgramAdapter extends ArrayAdapter<String> {
         return row;
     }
 
-    private String getTextArray(int position) throws IndexOutOfBoundsException {
+    private String getImportance(int position) throws IndexOutOfBoundsException {
         String string = view.get(position);
         String text = null;
 
@@ -68,7 +61,6 @@ public class ProgramAdapter extends ArrayAdapter<String> {
             text = "Cтепень срочности: Высокая!";
             holder.viewList.setTextColor(ContextCompat.getColor(context, R.color.red));
         }
-
         if (string.equals("2131231147")) {
             text = "Cтепень срочности: Средняя!";
             holder.viewList.setTextColor(ContextCompat.getColor(context, R.color.quantum_deeporange300));

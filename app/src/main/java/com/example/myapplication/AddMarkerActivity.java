@@ -1,9 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,20 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -62,21 +57,17 @@ public class AddMarkerActivity extends AppCompatActivity {
         reference = rootNode.getReference("markers");
         reference2 = rootNode.getReference("users");
         mAuth = FirebaseAuth.getInstance();
-        email = mAuth.getCurrentUser().getEmail();
+        email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(email, MODE_PRIVATE);
         name = sharedPreferences.getString("name", "");
         phone = sharedPreferences.getString("phone", "");
 
 
         ImageView close = findViewById(R.id.close2);
-        close.setOnClickListener(v -> {
-            finish();
-        });
+        close.setOnClickListener(v -> finish());
 
         Button save = findViewById(R.id.addBtn);
-        save.setOnClickListener(v -> {
-            addMarker();
-        });
+        save.setOnClickListener(v -> addMarker());
 
         uploadImage.setOnClickListener(v -> {
             Intent gallery = new Intent();
@@ -89,7 +80,7 @@ public class AddMarkerActivity extends AppCompatActivity {
 
     private void addMarker() {
 
-        if(imageUri != null){
+        if (imageUri != null) {
             uploadToFirebase(imageUri);
         }
 
@@ -115,18 +106,12 @@ public class AddMarkerActivity extends AppCompatActivity {
     private void uploadToFirebase(Uri uri) {
 
         StorageReference fileRef = root.child(System.currentTimeMillis() + "." + getFile(uri));
-        fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+        fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> fileRef.getDownloadUrl().addOnSuccessListener(uri1 -> {
 
-            fileRef.getDownloadUrl().addOnSuccessListener(uri1 -> {
-
-                Model model = new Model(uri1.toString());
-                reference.child(phone).child("image").setValue(model);
-                Toast.makeText(this, getString(R.string.addMarker), Toast.LENGTH_SHORT).show();
-            });
-        }).addOnProgressListener(snapshot -> {
-
-            progressBar.setVisibility(View.VISIBLE);
-        }).addOnFailureListener(e -> {
+            Model model = new Model(uri1.toString());
+            reference.child(phone).child("image").setValue(model);
+            Toast.makeText(this, getString(R.string.addMarker), Toast.LENGTH_SHORT).show();
+        })).addOnProgressListener(snapshot -> progressBar.setVisibility(View.VISIBLE)).addOnFailureListener(e -> {
 
             progressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(this, "Ошибка!" + e, Toast.LENGTH_LONG).show();
