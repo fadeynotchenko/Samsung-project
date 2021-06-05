@@ -54,6 +54,7 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="229dp"
+        android:textColor="@color/black"
         android:layout_height="70dp"
         android:fontFamily="sans-serif-condensed"
         android:text="@string/info3"
