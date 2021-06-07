@@ -45,7 +45,7 @@
         android:elevation="20sp"
         android:textColor="@color/mainColor4"
         android:textSize="16sp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="500dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

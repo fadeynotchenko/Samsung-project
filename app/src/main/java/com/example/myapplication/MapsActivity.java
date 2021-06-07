@@ -371,7 +371,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 double g1 = Double.parseDouble(geo1);
                 double g2 = Double.parseDouble(geo2);
-
                 LatLng lng1 = new LatLng(g1, g2);
 
                 mMap.addMarker(new MarkerOptions()
@@ -406,7 +405,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             //add value to users
                             Marker marker1 = new Marker(text, name2, phone, code, image);
                             df.child(phoneSP).child("active").setValue(marker1);
-                            //add 2
                             //remove to markers
                             reference.child(phone).child("info").removeValue();
                             reference.child(phone).child("name").removeValue();
@@ -430,9 +428,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float getColorMarker() {
 
         float x = 0;
-        if (code.equals("2131231144")) { x = HUE_RED2; }
-        if (code.equals("2131231147")) { x = HUE_ORANGE; }
-        if (code.equals("2131231146")) { x = HUE_GREEN; }
+        if (code.equals("2131231144")) {
+            x = HUE_RED2;
+        }
+        if (code.equals("2131231147")) {
+            x = HUE_ORANGE;
+        }
+        if (code.equals("2131231146")) {
+            x = HUE_GREEN;
+        }
 
         return x;
     }
@@ -440,6 +444,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void checkCallback() {
 
         DatabaseReference d2 = FirebaseDatabase.getInstance().getReference().child("users");
+
         d2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -487,16 +492,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private void returnMap(){
+    private void returnMap() {
 
         if (map.equals("Стандарт")) {
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
-        } else if(map.equals("Ретро")){
+        } else if (map.equals("Ретро")) {
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json_night));
         } else {
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
         }
     }
 
-
 }
+
+
