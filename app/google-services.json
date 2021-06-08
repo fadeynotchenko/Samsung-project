@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "527005525756",
-    "project_id": "projectsamsung-302117",
-    "storage_bucket": "projectsamsung-302117.appspot.com"
+    "project_number": "634389873926",
+    "project_id": "decent-fulcrum-316208",
+    "storage_bucket": "decent-fulcrum-316208.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:527005525756:android:d888f201d7149d2e83d979",
+        "mobilesdk_app_id": "1:634389873926:android:e2f13c5128d0f39c108a87",
         "android_client_info": {
           "package_name": "com.example.myapplication"
         }
       },
       "oauth_client": [
         {
-          "client_id": "527005525756-hs5hbf9ca8nr4bp18qq6tep6gtin8vqv.apps.googleusercontent.com",
+          "client_id": "634389873926-0u0hmn453ijbgqhdhqef2nfpfh422ppr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCx3fPbLixbMuJ0pvEKKM2iR89U71kz3wY"
+          "current_key": "AIzaSyDRT6qgncg7vTYF1QFkIImTiNZ5pHn197c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "527005525756-hs5hbf9ca8nr4bp18qq6tep6gtin8vqv.apps.googleusercontent.com",
+              "client_id": "634389873926-0u0hmn453ijbgqhdhqef2nfpfh422ppr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

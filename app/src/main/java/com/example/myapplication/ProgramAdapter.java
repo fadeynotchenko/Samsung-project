@@ -57,15 +57,15 @@ public class ProgramAdapter extends ArrayAdapter<String> {
         String string = view.get(position);
         String text = null;
 
-        if (string.equals("2131231144")) {
+        if (string.equals("2131231142")) {
             text = "Cтепень срочности: Высокая!";
             holder.viewList.setTextColor(ContextCompat.getColor(context, R.color.red));
         }
-        if (string.equals("2131231147")) {
+        if (string.equals("2131231145")) {
             text = "Cтепень срочности: Средняя!";
             holder.viewList.setTextColor(ContextCompat.getColor(context, R.color.quantum_deeporange300));
         }
-        if (string.equals("2131231146")) {
+        if (string.equals("2131231144")) {
             text = "Cтепень срочности: Низкая!";
             holder.viewList.setTextColor(ContextCompat.getColor(context, R.color.green));
         }

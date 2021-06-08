@@ -428,13 +428,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float getColorMarker() {
 
         float x = 0;
-        if (code.equals("2131231144")) {
+        if (code.equals("2131231142")) {
             x = HUE_RED2;
         }
-        if (code.equals("2131231147")) {
+        if (code.equals("2131231145")) {
             x = HUE_ORANGE;
         }
-        if (code.equals("2131231146")) {
+        if (code.equals("2131231144")) {
             x = HUE_GREEN;
         }
 
