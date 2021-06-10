@@ -53,6 +53,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -100,7 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //api key
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
-        Places.initialize(MapsActivity.this, getString(R.string.google_maps_api));
+        Places.initialize(MapsActivity.this, "AIzaSyDGfM1yqHI9gUPh36Nadq5FOjzsbgGCVI0");
 
         reference = FirebaseDatabase.getInstance().getReference().child("markers");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -285,11 +287,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
                                 locationCallback = new LocationCallback() {
                                     @Override
-                                    public void onLocationResult(LocationResult locationResult) {
+                                    public void onLocationResult(@NotNull LocationResult locationResult) {
                                         super.onLocationResult(locationResult);
-                                        if (locationResult == null) {
-                                            return;
-                                        }
                                         mLastKnowLocation = locationResult.getLastLocation();
                                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnowLocation.getLatitude(), mLastKnowLocation.getLongitude()), getDEFAULT_ZOOM()));
                                         mFusedLocationProviderClient.removeLocationUpdates(locationCallback);
