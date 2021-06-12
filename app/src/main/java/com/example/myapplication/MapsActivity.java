@@ -24,6 +24,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -41,6 +43,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -56,6 +59,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -75,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private CircleImageView viewPhoto;
     private Button addMarker;
     private TextView viewName, viewText, viewPhone;
+    private List<Polyline> polylines = null;
 
     private String phoneSP, phone, name2, text, code, image, check, emailSP, name, emailUser, zoom, map;
 
@@ -102,7 +107,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //api key
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
-        Places.initialize(MapsActivity.this, "AIzaSyDGfM1yqHI9gUPh36Nadq5FOjzsbgGCVI0");
+        Places.initialize(MapsActivity.this, "AIzaSyDLlcApKlppU84Ew6uZ5neoyFjZyJKiiNs");
 
         reference = FirebaseDatabase.getInstance().getReference().child("markers");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -111,7 +116,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @SuppressLint("MissingPermission")
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NotNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
 
@@ -427,13 +432,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float getColorMarker() {
 
         float x = 0;
-        if (code.equals("2131231142")) {
+        if (code.equals("2131231143")) {
             x = HUE_RED2;
         }
-        if (code.equals("2131231145")) {
+        if (code.equals("2131231146")) {
             x = HUE_ORANGE;
         }
-        if (code.equals("2131231144")) {
+        if (code.equals("2131231145")) {
             x = HUE_GREEN;
         }
 
@@ -501,6 +506,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
         }
     }
+
+
 
 }
 
