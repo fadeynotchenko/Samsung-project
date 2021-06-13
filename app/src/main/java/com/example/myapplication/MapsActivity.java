@@ -24,8 +24,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.example.myapplication.directionhelpers.FetchURL;
+import com.example.myapplication.directionhelpers.TaskLoadedCallback;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -44,6 +44,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -59,13 +60,12 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -79,7 +79,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private CircleImageView viewPhoto;
     private Button addMarker;
     private TextView viewName, viewText, viewPhone;
-    private List<Polyline> polylines = null;
+    private Polyline currentPolyline;
+    private LatLng lng2;
 
     private String phoneSP, phone, name2, text, code, image, check, emailSP, name, emailUser, zoom, map;
 
@@ -284,6 +285,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnowLocation.getLatitude(), mLastKnowLocation.getLongitude()), getDEFAULT_ZOOM()));
                                 reference2.child(phoneSP).child("geo1").setValue(mLastKnowLocation.getLatitude());
                                 reference2.child(phoneSP).child("geo2").setValue(mLastKnowLocation.getLongitude());
+                                lng2 = new LatLng(mLastKnowLocation.getLatitude(), mLastKnowLocation.getLongitude());
 
                             } else {
                                 LocationRequest locationRequest = LocationRequest.create();
@@ -376,6 +378,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 double g1 = Double.parseDouble(geo1);
                 double g2 = Double.parseDouble(geo2);
                 LatLng lng1 = new LatLng(g1, g2);
+
+                new FetchURL(MapsActivity.this).execute(getUrl(lng2, lng1), "driving");
 
                 mMap.addMarker(new MarkerOptions()
                         .position(lng1)
@@ -505,6 +509,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else {
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
         }
+    }
+
+    private String getUrl(LatLng origin, LatLng dest) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + "driving";
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+        return url;
+    }
+
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null)
+            currentPolyline.remove();
+        currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
     }
 
 
