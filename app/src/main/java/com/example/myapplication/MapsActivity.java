@@ -73,14 +73,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationCallback locationCallback;
     private View mapView;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference reference;
+    private DatabaseReference reference, reference2;
     private ProgramAdapter adapter;
     private BottomSheetBehavior bottomSheetBehavior, sheetBehavior2, sheetBehavior3;
     private CircleImageView viewPhoto;
     private Button addMarker;
     private TextView viewName, viewText, viewPhone;
     private Polyline currentPolyline;
-    private LatLng lng2;
+    private LatLng lng2, lng1;
 
     private String phoneSP, phone, name2, text, code, image, check, emailSP, name, emailUser, zoom, map;
 
@@ -274,7 +274,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void getDeviceLocation() {
 
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference2 = rootNode.getReference("users");
+        reference2 = rootNode.getReference("users");
         mFusedLocationProviderClient.getLastLocation()
                 .addOnCompleteListener(new OnCompleteListener<Location>() {
                     @Override
@@ -282,7 +282,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         if (task.isSuccessful()) {
                             mLastKnowLocation = task.getResult();
                             if (mLastKnowLocation != null) {
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnowLocation.getLatitude(), mLastKnowLocation.getLongitude()), getDEFAULT_ZOOM()));
+                                if(lng1 != null){
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lng1, getDEFAULT_ZOOM()));
+                                } else {
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnowLocation.getLatitude(), mLastKnowLocation.getLongitude()), getDEFAULT_ZOOM()));
+                                }
                                 reference2.child(phoneSP).child("geo1").setValue(mLastKnowLocation.getLatitude());
                                 reference2.child(phoneSP).child("geo2").setValue(mLastKnowLocation.getLongitude());
                                 lng2 = new LatLng(mLastKnowLocation.getLatitude(), mLastKnowLocation.getLongitude());
@@ -297,7 +301,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     public void onLocationResult(@NotNull LocationResult locationResult) {
                                         super.onLocationResult(locationResult);
                                         mLastKnowLocation = locationResult.getLastLocation();
-                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnowLocation.getLatitude(), mLastKnowLocation.getLongitude()), getDEFAULT_ZOOM()));
+                                        if(lng1 != null){
+                                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lng1, getDEFAULT_ZOOM()));
+                                        } else {
+                                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnowLocation.getLatitude(), mLastKnowLocation.getLongitude()), getDEFAULT_ZOOM()));
+                                        }
                                         mFusedLocationProviderClient.removeLocationUpdates(locationCallback);
                                     }
                                 };
@@ -377,7 +385,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 double g1 = Double.parseDouble(geo1);
                 double g2 = Double.parseDouble(geo2);
-                LatLng lng1 = new LatLng(g1, g2);
+                lng1 = new LatLng(g1, g2);
+
+                getDeviceLocation();
 
                 new FetchURL(MapsActivity.this).execute(getUrl(lng2, lng1), "driving");
 
@@ -512,19 +522,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private String getUrl(LatLng origin, LatLng dest) {
-        // Origin of route
+
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
-        // Destination of route
         String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
-        // Mode
         String mode = "mode=" + "driving";
-        // Building the parameters to the web service
         String parameters = str_origin + "&" + str_dest + "&" + mode;
-        // Output format
         String output = "json";
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
-        return url;
+        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
     }
 
     @Override
